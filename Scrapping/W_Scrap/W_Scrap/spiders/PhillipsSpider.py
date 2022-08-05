@@ -5,7 +5,7 @@ from unidecode import unidecode
 
 class PhillipsSpider(scrapy.Spider):
     name = "Phillips"
-    start_urls = ['https://www.phillips.com/auctions/auction/HK080122']
+    start_urls = ['https://www.phillips.com/auctions/auction/HK080322']
 
     def parse(self, response):
         for products in response.xpath('/html/body/div[2]/div/div[2]/div/div/div/div[2]/ul/li'):
