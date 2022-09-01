@@ -10,9 +10,8 @@ class LoupeThisSpider(scrapy.Spider):
         i = 0
         while (i != len(r['data'])):
             item = {
-                'Brand/Description/Price': r['data'][i]['attributes']['title'],
-                'Price': round((r['data'][i]['attributes']['current_bid_price_cents'] / 100) * 0.1 ) + (r['data'][i]['attributes']['current_bid_price_cents'] / 100),
-                #'WinningUserId': r['data'][i]['attributes']['winning_bid_user_id'],
+                'B-D': r['data'][i]['attributes']['title'],
+                'P': round((r['data'][i]['attributes']['current_bid_price_cents'] / 100) * 0.1 ) + (r['data'][i]['attributes']['current_bid_price_cents'] / 100),
             }
             yield item
             i+=1

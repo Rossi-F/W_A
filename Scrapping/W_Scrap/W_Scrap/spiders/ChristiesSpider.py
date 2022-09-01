@@ -16,3 +16,5 @@ class ChristiesSpider(scrapy.Spider):
                     }
             except:
                 print('PARSING ERROR')
+
+## Rewrite with integration of simple two columns, "B-D" and "Price" (B-D being brand followed by model and reference)

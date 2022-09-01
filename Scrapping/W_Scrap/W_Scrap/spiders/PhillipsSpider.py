@@ -25,4 +25,4 @@ class PhillipsSpider(scrapy.Spider):
                 item['Price'] = unidecode(re.sub('<[^<]+?>', '', item['Price'])).strip("Sold for  ")
             yield item
 
-            
+## Rewrite with integration of simple two columns, "B-D" and "Price" (B-D being brand followed by model and reference)
