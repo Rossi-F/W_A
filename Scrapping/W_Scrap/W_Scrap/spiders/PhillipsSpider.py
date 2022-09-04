@@ -9,20 +9,33 @@ class PhillipsSpider(scrapy.Spider):
 
     def parse(self, response):
         for products in response.xpath('/html/body/div[2]/div/div[2]/div/div/div/div[2]/ul/li'):
-            item = {
+            temp = {
                 'Brand' : products.xpath('.//*[@class="phillips-lot__description__artist"]').get(),
                 'Reference' : products.xpath('.//*[contains(text(), "Ref.")]').get(),
                 'Model': products.xpath('.//*[contains(text(), "Model:")]').get(),
-                'Price': products.xpath('.//*[@class="phillips-lot__sold"]').get(),
+                'P': products.xpath('.//*[@class="phillips-lot__sold"]').get(),
+                'B-D' : None,
             }
-            if (item['Brand'] != None):
-                item['Brand'] = unidecode(re.sub('<[^<]+?>', '', item['Brand']))
-            if (item['Reference'] != None):
-                item['Reference'] = unidecode(re.sub('<[^<]+?>', '', item['Reference']))
-            if (item['Model'] != None):
-                item['Model'] = unidecode(re.sub('<[^<]+?>', '', item['Model']).strip("Model:").strip("\xa0"))
-            if (item['Price'] != None):
-                item['Price'] = unidecode(re.sub('<[^<]+?>', '', item['Price'])).strip("Sold for  ")
+
+            item ={}
+            
+            if (temp['Brand'] != None):
+                temp['Brand'] = unidecode(re.sub('<[^<]+?>', '', temp['Brand']))
+                temp['B-D'] = temp['Brand'] + ' '
+            if (temp['Model'] != None):
+                temp['Model'] = unidecode(re.sub('<[^<]+?>', '', temp['Model']).strip("Model:").strip("\xa0"))
+                temp['B-D'] += temp['Model'] + ' '
+            if (temp['Reference'] != None):
+                temp['Reference'] = unidecode(re.sub('<[^<]+?>', '', temp['Reference']))
+                temp['B-D'] += temp['Reference']
+            if (temp['P'] != None):
+                temp['P'] = unidecode(re.sub('<[^<]+?>', '', temp['P'])).strip("Sold for  ")
+
+            if (temp['B-D'] != None):
+                item['B-D'] = temp['B-D']
+            if (temp['P'] != None):
+                item['P'] = (temp['P'].replace(",", "")).strip("HK$")
+
             yield item
 
 ## Rewrite with integration of simple two columns, "B-D" and "Price" (B-D being brand followed by model and reference)

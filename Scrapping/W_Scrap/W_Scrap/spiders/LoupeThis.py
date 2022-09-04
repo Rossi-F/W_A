@@ -11,7 +11,7 @@ class LoupeThisSpider(scrapy.Spider):
         while (i != len(r['data'])):
             item = {
                 'B-D': r['data'][i]['attributes']['title'],
-                'P': round((r['data'][i]['attributes']['current_bid_price_cents'] / 100) * 0.1 ) + (r['data'][i]['attributes']['current_bid_price_cents'] / 100),
+                'P': int(round((r['data'][i]['attributes']['current_bid_price_cents'] / 100) * 0.1 ) + (r['data'][i]['attributes']['current_bid_price_cents'] / 100)),
             }
             yield item
             i+=1
