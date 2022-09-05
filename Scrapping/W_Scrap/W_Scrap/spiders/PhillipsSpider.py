@@ -18,7 +18,7 @@ class PhillipsSpider(scrapy.Spider):
             }
 
             item ={}
-            
+
             if (temp['Brand'] != None):
                 temp['Brand'] = unidecode(re.sub('<[^<]+?>', '', temp['Brand']))
                 temp['B-D'] = temp['Brand'] + ' '
@@ -34,7 +34,7 @@ class PhillipsSpider(scrapy.Spider):
             if (temp['B-D'] != None):
                 item['B-D'] = temp['B-D']
             if (temp['P'] != None):
-                item['P'] = (temp['P'].replace(",", "")).strip("HK$")
+                item['P'] = (temp['P'].replace(",", ""))
 
             yield item
 
