@@ -1,9 +1,6 @@
 import pandas as pd
 
-df_lp = pd.read_json('Lp.json')
-df_phill = pd.read_json('Phill.json')
-
-df = pd.concat([df_phill, df_lp], ignore_index=True)
+df = pd.read_json('full_file.json')
 
 df_clean = pd.DataFrame()
 
